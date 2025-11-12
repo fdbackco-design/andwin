@@ -711,6 +711,7 @@ img {
 .work__heading {
   text-align: left;
   margin-bottom: var(--spacing-lg);
+  /* container의 패딩을 사용하므로 별도 패딩 불필요 */
 }
 
 .work__heading-title {
@@ -745,17 +746,8 @@ img {
   margin-bottom: var(--spacing-md);
   text-align: left;
   color: var(--color-text);
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 var(--spacing-sm);
+  /* container의 패딩을 사용하므로 별도 패딩 불필요 */
   font-weight: normal;
-}
-
-@media (min-width: 768px) {
-  .work__category-title {
-    padding: 0 var(--spacing-md);
-  }
 }
 
 .work__category-title-inner {
@@ -782,6 +774,7 @@ img {
 .work__grid-wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  /* container의 패딩을 사용하므로 별도 패딩 불필요 */
 }
 
 .work__grid-slider {
@@ -802,9 +795,19 @@ img {
   will-change: transform;
 }
 
+/* 데스크톱에서도 grid 유지 */
+.work__grid.work__grid-track {
+  display: grid !important;
+}
+
 @media (min-width: 1024px) {
   .work__grid {
     grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .work__grid.work__grid-track {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
   }
 }
 
@@ -817,7 +820,6 @@ img {
   }
   
   .work__grid-wrapper {
-    padding: 0 var(--spacing-sm);
     margin: 0 calc(-1 * var(--spacing-sm));
   }
 
