@@ -31,6 +31,7 @@ const partners = [
 
 export default function Partners() {
   const sectionRef = useRef<HTMLElement>(null);
+  const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,20 +39,35 @@ export default function Partners() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
+            // 한 번만 실행되도록 관찰 중지
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 }
     );
 
+    // 섹션 관찰
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
+
+    // 각 이미지 관찰
+    imgRefs.current.forEach((img) => {
+      if (img) {
+        observer.observe(img);
+      }
+    });
 
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
+      imgRefs.current.forEach((img) => {
+        if (img) {
+          observer.unobserve(img);
+        }
+      });
     };
   }, []);
 
@@ -63,7 +79,13 @@ export default function Partners() {
         <ul className="partners__grid">
           {partners.map((partner, index) => (
             <li key={index}>
-              <img src={partner.image} alt={partner.alt} />
+              <img
+                ref={(el) => {
+                  imgRefs.current[index] = el;
+                }}
+                src={partner.image}
+                alt={partner.alt}
+              />
             </li>
           ))}
         </ul>

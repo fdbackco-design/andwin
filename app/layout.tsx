@@ -16,6 +16,21 @@ export const metadata: Metadata = {
     description:
       '라이브커머스 기획·제작·송출·아카데미를 제공하는 전문 스튜디오. 소비자의 니즈와 제품에 맞는 퀄리티 높은 방송과 트렌디한 컨텐츠 제작.',
     type: 'website',
+    images: [
+      {
+        url: '/assets/andwin-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'ANDWIN LIVE STUDIO',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ANDWIN LIVE STUDIO - 라이브커머스 전문 스튜디오',
+    description:
+      '라이브커머스 기획·제작·송출·아카데미를 제공하는 전문 스튜디오. 소비자의 니즈와 제품에 맞는 퀄리티 높은 방송과 트렌디한 컨텐츠 제작.',
+    images: ['/assets/andwin-logo.png'],
   },
   viewport: 'width=device-width, initial-scale=1.0',
 };
