@@ -1,4 +1,43 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+/* Montserrat (영문) + Gmarket Sans (한글) 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Gmarket Sans 폰트 (한글) */
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2') format('woff2');
+  font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2') format('woff2');
+  font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2') format('woff2');
+  font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2') format('woff2');
+  font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
+}
+
 
 :root {
   --color-bg: #ffffff;
@@ -28,7 +67,7 @@ html {
 }
 
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Gmarket Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -173,7 +212,7 @@ img {
 }
 
 .header__title {
-  font-size: 1rem;
+  font-size: 60px;
   font-weight: 400;
   color: #ffffff;
   margin: 0;
@@ -248,6 +287,10 @@ img {
   .header {
     background-color: transparent;
   }
+  body,
+  body.header-scrolled {
+    padding-top: 0 !important;
+  }
 
   .header.is-scrolled {
     background-color: transparent;
@@ -289,7 +332,7 @@ img {
     left: 50%;
     transform: translateX(-50%);
     color: #111111;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-size: 18px;
     font-weight: 400;
     margin: 0;
     transition: color var(--transition-base);
@@ -323,7 +366,7 @@ img {
 
   .header__nav--mobile .header__nav-link {
     font-size: clamp(0.75rem, 2vw, 0.85rem);
-    color: #ffffff;
+    color: #111111;
     text-transform: uppercase;
     white-space: nowrap;
     padding: var(--spacing-xs) var(--spacing-xs);
@@ -332,11 +375,6 @@ img {
 
   .header__nav--mobile .header__nav-link::after {
     display: none;
-  }
-
-  /* 모바일에서 헤더 높이만큼 body에 padding-top 추가 */
-  body {
-    padding-top: 94px; /* header__top (50px) + header__nav--mobile (44px) */
   }
 
   /* 좌측 사이드 드로어 */
@@ -398,12 +436,6 @@ img {
   }
 }
 
-/* 스크롤 시 body padding-top 조정 */
-@media (max-width: 767px) {
-  body.header-scrolled {
-    padding-top: 50px; /* header__top만 보이므로 */
-  }
-}
 
 /* 데스크톱 스타일 */
 @media (min-width: 768px) {
@@ -459,6 +491,15 @@ img {
   overflow: hidden;
 }
 
+/* 모바일에서 Hero 섹션이 헤더 바로 아래에서 시작되도록 */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100vh !important; /* 화면 전체 높이 */
+    margin-top: 0 !important;     /* 위쪽 여백 제거 */
+    padding-top: 0 !important;    /* 내부 패딩 있는 경우 제거 */
+  }
+}
+
 @media (min-width: 768px) {
   .hero {
     padding: var(--spacing-xl) var(--spacing-md);
@@ -497,7 +538,7 @@ img {
 }
 
 .hero__label {
-  font-size: 0.875rem;
+  font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -506,7 +547,7 @@ img {
 }
 
 .hero__title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: 68px;
   font-weight: 700;
   letter-spacing: 0.05em;
   margin-bottom: var(--spacing-md);
@@ -782,8 +823,8 @@ img {
 }
 
 .andwin-service__title {
-  font-size: clamp(28px, 5vw, 56px);
-  font-weight: 700;
+  font-size: clamp(28px, 5vw, 50px);
+  font-weight: 550;
   line-height: 1.1;
   margin-bottom: 16px;
   color: var(--color-text);
@@ -791,7 +832,7 @@ img {
 }
 
 .andwin-service__subtitle {
-  font-size: clamp(16px, 2.5vw, 20px);
+  font-size: clamp(15px, 2.5vw, 20px);
   font-weight: 400;
   color: var(--color-text-secondary);
   margin-bottom: var(--spacing-sm);
@@ -939,7 +980,7 @@ img {
 }
 
 .work__category-title-inner {
-  font-size: clamp(18px, 4vw, 30px);
+  font-size: clamp(15px, 4vw, 28px);
   display: inline-block;
   line-height: 1;
 }
@@ -951,12 +992,12 @@ img {
 }
 
 .work__category-title strong {
-  font-weight: 700;
+  font-weight: 550;
 }
 
 .work__category-others {
   color: rgb(207, 207, 207);
-  font-weight: 700;
+  font-weight: 550;
 }
 
 .work__grid-wrapper {
@@ -978,21 +1019,13 @@ img {
   margin: 0 auto;
 }
 
-/* 데스크톱에서 전체 영역 사용 */
+/* 데스크톱에서 카테고리 타이틀과 같은 열로 시작 */
 @media (min-width: 768px) {
   .work__grid-wrapper {
     max-width: 100%;
-    margin-left: calc(-1 * var(--spacing-md));
-    margin-right: calc(-1 * var(--spacing-md));
-    width: calc(100% + 2 * var(--spacing-md));
-  }
-
-  @media (min-width: 1024px) {
-    .work__grid-wrapper {
-      margin-left: calc(-1 * var(--spacing-lg));
-      margin-right: calc(-1 * var(--spacing-lg));
-      width: calc(100% + 2 * var(--spacing-lg));
-    }
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
   }
 
   .work__grid-slider {
@@ -1140,7 +1173,7 @@ img {
 
 .concept-title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 700;
+  font-weight: 550;
   color: var(--color-text);
   margin: 0;
 }
@@ -1197,8 +1230,8 @@ img {
   width: 85%;
   background: rgba(0, 0, 0, 0.6);
   color: #fff;
-  font-size: clamp(12px, 2.25vw, 18px);
-  font-weight: 600;
+  font-size: clamp(11px, 2.25vw, 18px);
+  font-weight: 500;
   text-align: center;
   padding: 6px 10px;
   border-radius: 6px;
@@ -1880,3 +1913,16 @@ img {
   }
 }
 
+.academy__quote {
+  margin: 0;
+  padding-left: 1rem;         /* 글과 선 사이 여백 */
+  border-left: 3px solid var(--color-border); /* 세로선 */
+}
+
+.academy__quote p {
+  margin-bottom: 0.5rem;
+}
+
+.academy__quote p:last-child {
+  margin-bottom: 0;
+}

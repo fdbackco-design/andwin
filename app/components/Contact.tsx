@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, FormEvent } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,7 +12,9 @@ export default function Contact() {
     message: '',
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +49,7 @@ export default function Contact() {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formData.name.trim()) {
@@ -64,21 +67,51 @@ export default function Contact() {
       return;
     }
 
-    // 실제 API 호출은 나중에 추가 가능
-    // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
+    setIsSubmitting(true);
 
-    setShowSuccess(true);
-    setFormData({
-      storeUrl: '',
-      name: '',
-      phone: '',
-      email: '',
-      message: '',
-    });
+    try {
+      // EmailJS를 사용하여 이메일 전송
+      const templateParams = {
+        to_email: 'andwinn@naver.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        store_url: formData.storeUrl || '없음',
+        message: formData.message || '없음',
+        reply_to: formData.email,
+        subject: `[라이브커머스 문의] ${formData.name}님의 문의`,
+      };
 
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
+      // EmailJS를 사용하여 이메일 전송
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS 설정이 완료되지 않았습니다. 환경 변수를 확인해주세요.');
+      }
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      // 성공 메시지 표시
+      setShowSuccess(true);
+      setFormData({
+        storeUrl: '',
+        name: '',
+        phone: '',
+        email: '',
+        message: '',
+      });
+
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error('이메일 전송 실패:', error);
+      alert('이메일 전송에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -101,7 +134,7 @@ export default function Contact() {
               <p>Tel: 070-8806-4080</p>
               <p>Email: andwinn@naver.com</p>
             </div>
-            <form className="contact__form" onSubmit={handleSubmit}>
+            <form className="contact__form" onSubmit={handleSubmit} ref={formRef}>
             <div className="contact__form-group">
               <label htmlFor="storeUrl" className="contact__form-label">
                 브랜드 스토어 URL
@@ -174,7 +207,12 @@ export default function Contact() {
                 placeholder="문의 내용을 입력해주세요"
               />
             </div>
-            <button type="submit" className="contact__form-button">
+            <button 
+              type="button" 
+              className="contact__form-button"
+              disabled={true}
+              onClick={(e) => e.preventDefault()}
+            >
               문의하기
             </button>
             {showSuccess && (

@@ -46,9 +46,11 @@ export default function Academy() {
             <h2 className="academy__title">LIVE ACADEMY</h2>
             <h3 className="academy__heading">라이브커머스에 특화된 전문화 교육과정</h3>
             <div className="academy__text">
-              <p>빠르고 정확하게 모바일에 라이브 쇼호스트를 위한 교육을 진행합니다</p>
-              <p>홈쇼핑과 다르게 모바일라이브는 양방향 소통을 합니다.</p>
-              <p>가전/뷰티/패션/리빙 등 모바일라이브에 맞는 교육을 합니다.</p>
+              <blockquote className="academy__quote">
+                <p>빠르고 정확하게 모바일에 라이브 쇼호스트를 위한 교육을 진행합니다</p>
+                <p>홈쇼핑과 다르게 모바일라이브는 양방향 소통을 합니다.</p>
+                <p>가전/뷰티/패션/리빙 등 모바일라이브에 맞는 교육을 합니다.</p>
+              </blockquote>
             </div>
             <a href="#academy" className="academy__button">
               아카데미 알아보기

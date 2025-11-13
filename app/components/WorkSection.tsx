@@ -79,7 +79,7 @@ export default function WorkSection() {
       const trackKey = category;
       const track = trackRefs.current[trackKey];
       if (!track) {
-        console.warn(`WorkSection: Track not found for category ${trackKey}`);
+        //console.warn(`WorkSection: Track not found for category ${trackKey}`);
         return;
       }
 
@@ -96,7 +96,7 @@ export default function WorkSection() {
         }
 
         if (items.length === 0) {
-          console.warn(`WorkSection: No items found for category ${trackKey} after ${maxRetries} retries`);
+          //console.warn(`WorkSection: No items found for category ${trackKey} after ${maxRetries} retries`);
           return;
         }
 
@@ -248,28 +248,28 @@ export default function WorkSection() {
       const id = requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            console.log('WorkSection: workData length:', workData.length);
+            //console.log('WorkSection: workData length:', workData.length);
             categories.forEach((category) => {
               const items = getItemsByCategory(category);
-              console.log(`WorkSection: Category ${category} has ${items.length} items:`, items);
+              //console.log(`WorkSection: Category ${category} has ${items.length} items:`, items);
               
               // DOM에서 실제로 렌더링되었는지 확인
               const track = trackRefs.current[category];
               if (track) {
                 const renderedItems = track.querySelectorAll('.work-card');
-                console.log(`WorkSection: Category ${category} - Rendered items in DOM:`, renderedItems.length);
+                //console.log(`WorkSection: Category ${category} - Rendered items in DOM:`, renderedItems.length);
                 if (renderedItems.length > 0) {
                   const firstItem = renderedItems[0] as HTMLElement;
                   const img = firstItem.querySelector('img');
-                  console.log(`WorkSection: Category ${category} - First item image src:`, img?.src);
-                  console.log(`WorkSection: Category ${category} - First item image complete:`, img?.complete);
+                  //console.log(`WorkSection: Category ${category} - First item image src:`, img?.src);
+                  //console.log(`WorkSection: Category ${category} - First item image complete:`, img?.complete);
                 } else {
-                  console.warn(`WorkSection: Category ${category} - No items rendered in DOM, track children:`, track.children.length);
-                  console.warn(`WorkSection: Category ${category} - Track innerHTML length:`, track.innerHTML.length);
-                  console.warn(`WorkSection: Category ${category} - Track outerHTML:`, track.outerHTML.substring(0, 200));
+                  //console.warn(`WorkSection: Category ${category} - No items rendered in DOM, track children:`, track.children.length);
+                  //console.warn(`WorkSection: Category ${category} - Track innerHTML length:`, track.innerHTML.length);
+                  //console.warn(`WorkSection: Category ${category} - Track outerHTML:`, track.outerHTML.substring(0, 200));
                 }
               } else {
-                console.warn(`WorkSection: Category ${category} - Track not found`);
+                //console.warn(`WorkSection: Category ${category} - Track not found`);
               }
             });
           });
@@ -294,7 +294,7 @@ export default function WorkSection() {
           const items = getItemsByCategory(category);
           
           if (!items || items.length === 0) {
-            console.warn(`WorkSection: No items found for category ${category}`);
+            //console.warn(`WorkSection: No items found for category ${category}`);
             return null;
           }
           
@@ -350,10 +350,10 @@ export default function WorkSection() {
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
-                                console.error(`WorkSection: Image failed to load: ${item.image}`);
+                                //console.error(`WorkSection: Image failed to load: ${item.image}`);
                               }}
                               onLoad={() => {
-                                console.log(`WorkSection: Image loaded successfully: ${item.image}`);
+                                //console.log(`WorkSection: Image loaded successfully: ${item.image}`);
                               }}
                             />
                           </div>

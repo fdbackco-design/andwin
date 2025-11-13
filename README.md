@@ -116,6 +116,60 @@ npm run build
 - `live-reference/*.jpg`: 각 브랜드별 라이브 레퍼런스 이미지
 - `concept/*.jpg`: 컨셉 갤러리 이미지
 
+## EmailJS 설정 (Contact 폼)
+
+Contact 폼에서 이메일 전송 기능을 사용하려면 EmailJS 설정이 필요합니다.
+
+### 1. EmailJS 계정 생성
+
+1. [https://www.emailjs.com/](https://www.emailjs.com/)에서 무료 계정을 생성합니다.
+2. 대시보드에서 **Email Services**를 추가합니다 (Gmail, Outlook 등).
+3. **Email Templates**에서 새 템플릿을 생성합니다.
+
+### 2. 템플릿 설정
+
+EmailJS 템플릿에서 다음 변수들을 사용할 수 있습니다:
+
+- `{{to_email}}`: 수신자 이메일 (dlsdjdmlqlc3@naver.com)
+- `{{from_name}}`: 발신자 이름
+- `{{from_email}}`: 발신자 이메일
+- `{{phone}}`: 연락처
+- `{{store_url}}`: 브랜드 스토어 URL
+- `{{message}}`: 문의 내용
+- `{{subject}}`: 이메일 제목
+
+템플릿 예시:
+```
+제목: {{subject}}
+
+이름: {{from_name}}
+이메일: {{from_email}}
+연락처: {{phone}}
+브랜드 스토어 URL: {{store_url}}
+
+문의 내용:
+{{message}}
+```
+
+### 3. 환경 변수 설정
+
+프로젝트 루트에 `.env.local` 파일을 생성하고 다음 정보를 입력하세요:
+
+```env
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key_here
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id_here
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id_here
+```
+
+각 값은 EmailJS 대시보드에서 확인할 수 있습니다:
+- **Public Key**: Account > API Keys
+- **Service ID**: Email Services > Service ID
+- **Template ID**: Email Templates > Template ID
+
+### 4. Vercel 배포 시 환경 변수 설정
+
+Vercel 대시보드에서 프로젝트 설정 > Environment Variables에 위의 환경 변수들을 추가하세요.
+
 ## 커스터마이징
 
 ### 색상 변경
